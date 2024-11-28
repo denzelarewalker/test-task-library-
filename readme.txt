@@ -1,24 +1,38 @@
 
+--- Добавить новую книгу ---
+poetry run library-manager add "Название" "Автор" Год
+--- Пример использования ---
+poetry run library-manager add "Война и мир" "Лев Толстой" 1869
 
 
----Добавить новую книгу----
-python main.py add "Название" "Автор" Год
+
+--- Удалить книгу по id ---
+poetry run library-manager delete book-id
+--- Пример использования ---
+poetry run library-manager delete 2
 
 
----Удалить книгу по id---
-python main.py delete book-id
+
+--- Поиск книги по названию, автору или году ---
+poetry run library-manager search "Название" или "Автор" или Год
+--- Пример использования ---
+poetry run library-manager search "Война и мир"
 
 
-----Поиск книги ------
-python main.py search "Название" или "Автор" или Год
+
+--- Показать все книги которые находятся в библиотеке ---
+poetry run library-manager display
+--- Пример использования ---
+poetry run library-manager display
 
 
----Показать все книги---
-python main.py display
+
+--- Изменяет статус книги по id ---
+poetry run library-manager change_status book-id "выдана" или "в наличии"
+--- Пример использования ---
+poetry run library-manager change_status 3 "выдана"
 
 
-----Изменяет статус книги по id-----
-python main.py change_status id "выдана" или "в наличии"
 
 poetry run library-manager add "Война и мир" "Лев Толстой" 1869
 poetry run library-manager add "Преступление и наказание" "Фёдор Достоевский" 1866

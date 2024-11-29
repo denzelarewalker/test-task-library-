@@ -56,7 +56,7 @@ class Library:
         book = Book(self.generate_id(), title, author, year)
         self.books.append(book)
         self.save_books(self.books)
-        print(f"Книга '{title}' добавлена.")
+        print(f"Книга '{title}' добавлена")
 
 
     def delete_book(self, book_id: int):
@@ -86,10 +86,11 @@ class Library:
         """Searches books by title, author or year"""
         results = [book for book in self.books if search_term.lower() in book.title.lower() or \
                                                 search_term.lower() in book.author.lower() or \
-                                                int(search_term) == book.year]
+                                                search_term == int(book.year)]
         if results:
             for book in results:
                 print(book)
+            return results
         else:
             print('Книги по запросу отсутствуют')
 
@@ -99,8 +100,9 @@ class Library:
         if self.books:
             for book in self.books:
                 print(book)
+            return self.books
         else:
-            print("Библиотека пуста.")
+            print("Библиотека пуста")
 
 
     def change_book_status(self, book_id: int, new_status: str):
@@ -108,21 +110,23 @@ class Library:
         try:
             book_id = int(book_id)
         except ValueError:
-            print("Некорректный ID книги.")
-            return
+            result = "Некорректный ID книги"
+            print(result)
+            return result
 
         valid_statuses = ["в наличии", "выдана"]
         if new_status not in valid_statuses:
-            print("Неверный статус. Допустимые статусы: 'в наличии', 'выдана'")
-            return
+            result = "Неверный статус. Допустимые статусы: 'в наличии', 'выдана'"
+            print(result)
+            return result
 
         for book in self.books:
             if book.id == book_id:
                 book.status = new_status
                 self.save_books(self.books)
-                print(f"Статус книги с ID {book_id} изменен на '{new_status}'.")
+                print(f"Статус книги с ID {book_id} изменен на '{new_status}'")
                 return
-        print(f"Книга с ID {book_id} не найдена.")
+        print(f"Книга с ID {book_id} не найдена")
 
 
 

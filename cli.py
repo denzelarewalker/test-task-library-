@@ -1,8 +1,14 @@
 import argparse
-
 from library_management import Library
 
+
+basefile_path = "library.json"
+
+
 def cli():
+
+    library = Library(basefile_path)
+
     parser = argparse.ArgumentParser(description='Library management application')
     subparsers = parser.add_subparsers(dest='command', help='Available commands')
 
@@ -21,7 +27,7 @@ def cli():
     search_parser.add_argument('search_term', type=str, help='Search term (title, author, or year)')
 
     # Отображение всех книг
-    display_parser = subparsers.add_parser('display', help='Display all books')
+    display_parser = subparsers.add_parser('all_books', help='Display all books')
 
     # Изменение статуса книги
     change_status_parser = subparsers.add_parser('change_status', help='Change book status')
@@ -30,7 +36,6 @@ def cli():
 
     args = parser.parse_args()
 
-    library = Library("library.json")
 
     if args.command == 'add':
         library.add_book(args.title, args.author, args.year)
@@ -38,13 +43,9 @@ def cli():
         library.delete_book(args.book_id)
     elif args.command == 'search':
         library.search_book(args.search_term)
-    elif args.command == 'display':
+    elif args.command == 'all_books':
         library.display_books()
     elif args.command == 'change_status':
         library.change_book_status(args.book_id, args.new_status)
     else:
         parser.print_help()
-
-if __name__ == "__main__":
-    cli()
-

@@ -20,6 +20,7 @@ Command Line Interface
 
 Команды менеджмента библиотеки:
 
+
 --- Добавить новую книгу ---
 
 poetry run library-service add "Название" "Автор" Год
@@ -30,24 +31,36 @@ poetry run library-service add "Война и мир" "Лев Толстой" 18
 
 
 --- Удалить книгу по id ---
+
 poetry run library-service delete book-id
+
 --- Пример использования ---
+
 poetry run library-service delete 2
 
 
 --- Поиск книги по названию, автору или году ---
+
 poetry run library-service search "Название" или "Автор" или Год
+
 --- Пример использования ---
+
 poetry run library-service search "Война и мир"
 
 
 --- Показать все книги которые находятся в библиотеке ---
+
 poetry run library-service all_books
+
 --- Пример использования ---
+
 poetry run library-service all_books
 
 
 --- Изменяет статус книги по id ---
+
 poetry run library-service change_status book-id "выдана" или "в наличии"
+
 --- Пример использования ---
+
 poetry run library-service change_status 3 "выдана"

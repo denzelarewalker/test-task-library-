@@ -10,7 +10,7 @@ python = "^3.12"
 
 
 [tool.poetry.scripts]
-library-manager = "cli:cli"
+library-service = "cli:cli"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"

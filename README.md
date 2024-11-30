@@ -1,44 +1,49 @@
-Скачайте и распакуйте архив. 
-Затем перейдите в папку с проектом с помощью командной строки используя команду cd 
+Command Line Interface
 
+Скачайте и распакуйте архив с проектом
+Затем перейдите в папку с проектом с помощью командной строки используя команду cd 
 
 Пример [ cd C:\test-task-library--master ]
 
+Установите poetry
+[ pip install poetry ]
+
+Установите зависимости проекта
+[ poetry install ]
+
+Запуск теста
+[ poetry run pytest ]
+
+Запуск теста c отображением процента покрытия
+[ poetry run pytest --cov ]
+
+Команды менеджмента библиотеки:
 
 --- Добавить новую книгу ---
-poetry run library-manager add "Название" "Автор" Год
+poetry run library-service add "Название" "Автор" Год
 --- Пример использования ---
-poetry run library-manager add "Война и мир" "Лев Толстой" 1869
-
+poetry run library-service add "Война и мир" "Лев Толстой" 1869
 
 
 --- Удалить книгу по id ---
-poetry run library-manager delete book-id
+poetry run library-service delete book-id
 --- Пример использования ---
-poetry run library-manager delete 2
-
+poetry run library-service delete 2
 
 
 --- Поиск книги по названию, автору или году ---
-poetry run library-manager search "Название" или "Автор" или Год
+poetry run library-service search "Название" или "Автор" или Год
 --- Пример использования ---
-poetry run library-manager search "Война и мир"
-
+poetry run library-service search "Война и мир"
 
 
 --- Показать все книги которые находятся в библиотеке ---
-poetry run library-manager all_books
+poetry run library-service all_books
 --- Пример использования ---
-poetry run library-manager all_books
-
+poetry run library-service all_books
 
 
 --- Изменяет статус книги по id ---
-poetry run library-manager change_status book-id "выдана" или "в наличии"
+poetry run library-service change_status book-id "выдана" или "в наличии"
 --- Пример использования ---
-poetry run library-manager change_status 3 "выдана"
-
-
-
-
-poetry run pytest --cov
+poetry run library-service change_status 3 "выдана"

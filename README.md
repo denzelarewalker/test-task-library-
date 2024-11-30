@@ -1,6 +1,7 @@
 Command Line Interface
 
 Скачайте и распакуйте архив с проектом
+
 Затем перейдите в папку с проектом с помощью командной строки используя команду cd 
 
 Пример [ cd C:\test-task-library--master ]
@@ -20,8 +21,11 @@ Command Line Interface
 Команды менеджмента библиотеки:
 
 --- Добавить новую книгу ---
+
 poetry run library-service add "Название" "Автор" Год
+
 --- Пример использования ---
+
 poetry run library-service add "Война и мир" "Лев Толстой" 1869
 
 

@@ -39,3 +39,6 @@ poetry run library-manager change_status book-id "выдана" или "в на�
 poetry run library-manager change_status 3 "выдана"
 
 
+
+
+poetry run pytest --cov

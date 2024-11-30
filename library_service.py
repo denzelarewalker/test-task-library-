@@ -45,10 +45,8 @@ class Library:
 
     def generate_id(self) -> int:
         """Generates a unique ID for a book"""
-        try:
-            return max(book.id for book in self.books) + 1 if self.books else 1
-        except (FileNotFoundError, json.JSONDecodeError):
-            return 1
+        return max(book.id for book in self.books) + 1 if self.books else 1
+
     
 
     def add_book(self, title: str, author: str, year: int):
@@ -100,7 +98,6 @@ class Library:
         if self.books:
             for book in self.books:
                 print(book)
-            return self.books
         else:
             print("Библиотека пуста")
 
@@ -110,15 +107,13 @@ class Library:
         try:
             book_id = int(book_id)
         except ValueError:
-            result = "Некорректный ID книги"
-            print(result)
-            return result
+            print("Некорректный ID книги")
+            return
 
         valid_statuses = ["в наличии", "выдана"]
         if new_status not in valid_statuses:
-            result = "Неверный статус. Допустимые статусы: 'в наличии', 'выдана'"
-            print(result)
-            return result
+            print("Неверный статус. Допустимые статусы: 'в наличии', 'выдана'")
+            return
 
         for book in self.books:
             if book.id == book_id:

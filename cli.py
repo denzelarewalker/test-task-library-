@@ -1,5 +1,5 @@
 import argparse
-from library_management import Library
+from library_service import Library
 
 
 basefile_path = "library.json"

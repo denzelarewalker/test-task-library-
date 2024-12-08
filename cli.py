@@ -44,7 +44,7 @@ def cli():
     elif args.command == 'search':
         library.search_book(args.search_term)
     elif args.command == 'all_books':
-        library.display_books()
+        library.all_books()
     elif args.command == 'change_status':
         library.change_book_status(args.book_id, args.new_status)
     else:

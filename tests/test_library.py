@@ -7,7 +7,6 @@ db_file_path = 'test_path.json'
 
 @pytest.fixture
 def mock_json_data():
-    """Mock JSON data for the library"""
     return json.dumps([
         {"id": 1, "title": "Книга 1", "author": "Автор 1", "year": 2001, "status": "в наличии"},
         {"id": 2, "title": "Книга 2", "author": "Автор 2", "year": 2002, "status": "в наличии"}
@@ -16,7 +15,6 @@ def mock_json_data():
 
 @pytest.fixture
 def library(mock_json_data):
-    """Fixture for Library instance with mocked JSON data"""
     with patch("builtins.open", mock_open(read_data=mock_json_data)):
         lib = Library(db_file_path)
     yield lib
@@ -28,7 +26,6 @@ def library(mock_json_data):
 
 
 def test_load_books(library):
-    """Test loading books from JSON"""
     assert len(library.books) == 2
     assert library.books[0].title == "Книга 1"
     assert library.books[1].author == "Автор 2"
@@ -37,14 +34,12 @@ def test_load_books(library):
 
 
 def test_add_book(library):
-    """Test adding a book"""
     library.add_book("Книга 3", "Автор 3", 2003)
     assert len(library.books) == 3
     assert library.books[-1].title == "Книга 3"
 
 
 def test_delete_book(library, capsys):
-    """Test deleting a book"""
     library.delete_book('word')
     captured = capsys.readouterr()
     assert captured.out == "Некорректный ID книги\n"
@@ -61,7 +56,6 @@ def test_delete_book(library, capsys):
 
 
 def test_search_book_by_title(library, capsys):
-    """Test searching book by title"""
     search_results = library.search_book("Книга 1")
     capsys.readouterr()
     assert len(search_results) == 1
@@ -71,7 +65,6 @@ def test_search_book_by_title(library, capsys):
     assert captured.out == 'Книги по запросу отсутствуют\n'
 
 def test_change_book_status(library, capsys):
-    """Test changing the status of a book"""
     library.change_book_status('word', "выдана")
     captured = capsys.readouterr()
     assert captured.out == 'Некорректный ID книги\n'
@@ -92,7 +85,6 @@ def test_change_book_status(library, capsys):
 
 
 def test_display_books(library, capsys):
-    """Test displaying books"""
     library.display_books()  # Check for outputs if needed
     captured = capsys.readouterr()
     assert captured.out == 'ID: 1, Название: Книга 1, Автор: Автор 1, Год: 2001, Статус: в наличии\nID: 2, Название: Книга 2, Автор: Автор 2, Год: 2002, Статус: в наличии\n'
@@ -103,6 +95,3 @@ def test_display_books(library, capsys):
     captured = capsys.readouterr()
     assert captured.out == 'Библиотека пуста\n'
 
-
-if __name__ == "__main__":
-    pytest.main()

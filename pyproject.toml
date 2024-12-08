@@ -23,7 +23,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.coverage.run]
 branch = true
-omit = ['library_manager/tests/*']
+omit = ['tests/*']
 
 [tool.coverage.report]
 show_missing = true

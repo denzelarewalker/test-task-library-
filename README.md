@@ -1,4 +1,4 @@
-Command Line Interface
+# Library Service Command Line Interface
 
 Скачайте и распакуйте архив с проектом
 

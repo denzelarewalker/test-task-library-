@@ -1,21 +1,19 @@
 # Library Service Command Line Interface
 
-Скачайте и распакуйте архив с проектом
+* Скачайте и распакуйте архив с проектом
 
-Затем перейдите в папку с проектом с помощью командной строки используя команду cd 
+* Затем перейдите в папку с проектом с помощью командной строки используя команду cd 
 
-Пример [ cd C:\test-task-library--master ]
+Пример `cd C:\test-task-library--master`
 
-Установите poetry
-[ pip install poetry ]
+* Установите poetry `pip install poetry`
 
-Установите зависимости проекта
-[ poetry install ]
+* Установите зависимости проекта `poetry install`
 
 
   Запуск теста|Запуск теста c отображением процента покрытия
   -|-
-  poetry run pytest | poetry run pytest --cov
+  `poetry run pytest` | `poetry run pytest --cov`
 
 ## Use Cases
   Команда|Описание

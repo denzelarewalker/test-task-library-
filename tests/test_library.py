@@ -1,6 +1,5 @@
 import pytest
-import json
-import os
+import json, os
 from unittest.mock import patch, mock_open
 from library_service.library_service import Library 
 

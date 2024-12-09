@@ -1,5 +1,5 @@
 import argparse
-from library_service import Library
+from .library_service import Library
 
 
 basefile_path = "library.json"
@@ -27,7 +27,7 @@ def cli():
     search_parser.add_argument('search_term', type=str, help='Search term (title, author, or year)')
 
     # Отображение всех книг
-    display_parser = subparsers.add_parser('all_books', help='Display all books')
+    subparsers.add_parser('all_books', help='Display all books')
 
     # Изменение статуса книги
     change_status_parser = subparsers.add_parser('change_status', help='Change book status')

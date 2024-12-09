@@ -1,15 +1,16 @@
 import pytest
-import json, os
+import json
+import os
 from unittest.mock import patch, mock_open
-from library_service import Library 
+from library_service.library_service import Library 
 
 db_file_path = 'test_path.json'
 
 @pytest.fixture
 def mock_json_data():
     return json.dumps([
-        {"id": 1, "title": "Книга 1", "author": "Автор 1", "year": 2001, "status": "в наличии"},
-        {"id": 2, "title": "Книга 2", "author": "Автор 2", "year": 2002, "status": "в наличии"}
+        {"id": 1, "title": "Oliver Twist", "author": "Charles Dickens", "year": 1837, "status": "в наличии"},
+        {"id": 2, "title": "Pride and Prejudice", "author": "Jane Austen", "year": 1813, "status": "в наличии"}
     ])
 
 
@@ -27,8 +28,8 @@ def library(mock_json_data):
 
 def test_load_books(library):
     assert len(library.books) == 2
-    assert library.books[0].title == "Книга 1"
-    assert library.books[1].author == "Автор 2"
+    assert library.books[0].title == "Oliver Twist"
+    assert library.books[1].author == "Jane Austen"
     library.basefile_path = 'fake_path.json'
     assert library.load_books() == []
 
@@ -42,11 +43,11 @@ def test_add_book(library):
 def test_delete_book(library, capsys):
     library.delete_book('word')
     captured = capsys.readouterr()
-    assert captured.out == "Некорректный ID книги\n"
+    assert captured.out == "Invalid book ID\n"
 
     library.delete_book(12)
     captured = capsys.readouterr()
-    assert captured.out == 'Книга с ID 12 не найдена\n'
+    assert captured.out == 'Book with ID 12 not found\n'
 
     assert len(library.books) == 2
     library.delete_book(1)
@@ -56,26 +57,26 @@ def test_delete_book(library, capsys):
 
 
 def test_search_book_by_title(library, capsys):
-    search_results = library.search_book("Книга 1")
+    search_results = library.search_book("Oliver Twist")
     capsys.readouterr()
     assert len(search_results) == 1
-    assert search_results[0].title == "Книга 1"
-    search_results = library.search_book("Книга 3")
+    assert search_results[0].title == "Oliver Twist"
+    search_results = library.search_book("Sense and Sensibility")
     captured = capsys.readouterr()
-    assert captured.out == 'Книги по запросу отсутствуют\n'
+    assert captured.out == 'There are no books on request\n'
 
 def test_change_book_status(library, capsys):
     library.change_book_status('word', "выдана")
     captured = capsys.readouterr()
-    assert captured.out == 'Некорректный ID книги\n'
+    assert captured.out == 'Invalid book ID\n'
 
     library.change_book_status(1, "random string")
     captured = capsys.readouterr()
-    assert captured.out == "Неверный статус. Допустимые статусы: 'в наличии', 'выдана'\n"
+    assert captured.out == "Invalid status. Acceptable statuses: 'в наличии', 'выдана'\n"
 
     library.change_book_status(12, "выдана")
     captured = capsys.readouterr()
-    assert captured.out == "Книга с ID 12 не найдена\n"
+    assert captured.out == "Book with ID 12 not found\n"
 
     library.change_book_status(1, "выдана")
     assert library.books[0].status == "выдана"
@@ -85,13 +86,13 @@ def test_change_book_status(library, capsys):
 
 
 def test_display_books(library, capsys):
-    library.display_books()  # Check for outputs if needed
+    library.all_books()  # Check for outputs if needed
     captured = capsys.readouterr()
-    assert captured.out == 'ID: 1, Название: Книга 1, Автор: Автор 1, Год: 2001, Статус: в наличии\nID: 2, Название: Книга 2, Автор: Автор 2, Год: 2002, Статус: в наличии\n'
+    assert captured.out == 'ID: 1, Title: Oliver Twist, Author: Charles Dickens, Year: 1837, Status: в наличии\nID: 2, Title: Pride and Prejudice, Author: Jane Austen, Year: 1813, Status: в наличии\n'
     library.delete_book(1)
     library.delete_book(2)
     capsys.readouterr()
-    library.display_books()
+    library.all_books()
     captured = capsys.readouterr()
-    assert captured.out == 'Библиотека пуста\n'
+    assert captured.out == 'The library is empty\n'
 

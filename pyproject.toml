@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "library-manager"
+name = "library-service"
 version = "0.1.0"
 description = ""
 authors = ["Your <you@nail.ru>"]
@@ -10,11 +10,12 @@ python = "^3.12"
 
 
 [tool.poetry.scripts]
-library-service = "cli:cli"
+library-service = "library_service.cli:cli"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"
 pytest-cov = "^6.0.0"
+ruff = "^0.8.2"
 
 [build-system]
 requires = ["poetry-core"]
@@ -28,6 +29,10 @@ omit = ['tests/*']
 [tool.coverage.report]
 show_missing = true
 
+[tool.ruff]
+line-length = 79
+target-version = "py312"
+fix = true
 
 
 [tool.coverage.html]

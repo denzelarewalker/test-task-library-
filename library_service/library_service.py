@@ -11,7 +11,7 @@ class Book:
 
 
     def __str__(self) -> str:
-        return f"ID: {self.id}, Название: {self.title}, Автор: {self.author}, Год: {self.year}, Статус: {self.status}"
+        return f"ID: {self.id}, Title: {self.title}, Author: {self.author}, Year: {self.year}, Status: {self.status}"
     
 
 

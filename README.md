@@ -1,7 +1,7 @@
 # Library Service Command Line Interface
 ## Use Cases
   Команда|Описание
-  -|-|-
+  -|-
   poetry run library-service add "Название" "Автор" Год | Добавление новой книги
 Скачайте и распакуйте архив с проектом
 
